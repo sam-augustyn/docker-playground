@@ -1,0 +1,14 @@
+#taken from this sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+version: '2'
+services:
+  web:
+      build: .
+      ports:
+          - "5000:5000" #forwards containers exposed port to your host
+      volumes:
+          - .:/code #mounts project directory to /code
+      depends_on:
+          - redis #links web service to redis
+  redis:
+      image: redis
