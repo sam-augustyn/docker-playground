@@ -1,3 +1,6 @@
 FROM ubuntu:latest
-RUN apt update && apt upgrade -y
+ARG DEBIAN_FRONTEND=noninteractive #run dpkg without interactive dialogue
+RUN apt update && apt install nmap apache2 -y #install nmap and apache
+EXPOSE 80
+RUN nmap -p- localhost
 CMD whoami
